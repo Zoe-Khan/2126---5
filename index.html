@@ -2,6 +2,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en" >
 
@@ -37,9 +39,11 @@
 
 <body translate="no" >
   <audio controls id="smack">
-  <source src="https://math.seattleacademy.org/garyanderson/snd/smack.wav" type="audio/ogg">
-  <source src="horse.mp3" type="audio/mpeg">
-  Your browser does not support the audio tag.
+  <source src="https://math.seattleacademy.org/garyanderson/snd/smack.wav"> 
+</audio>
+  
+<audio controls id="oh_no">
+  <source src="https://math.seattleacademy.org/garyanderson/snd/oh_no.wav">
 </audio>
 
 <div>
@@ -52,7 +56,10 @@
   
       <script id="rendered-js" >
 console.clear();
+
 const smacksnd = document.getElementById("smack");
+const oh_nosnd = document.getElementById("oh_no");
+
 let timer = 0;
 const c = document.getElementById("myCanvas");
 const ctx = c.getContext("2d");
@@ -150,6 +157,7 @@ function checkCollide() {
     deaths = deathSpan.innerHTML * 1 + 1;
     deaths.innerHTML = deaths;
     doResetBots();
+    oh_nosnd.play();
   }
   for (i = bots.length - 1; i > 0; i--) {
     //console.log(i,bots[i].r);
@@ -194,4 +202,3 @@ document.getElementById("resetBots").addEventListener("click", doResetBots);
 
 </html>
  
-
