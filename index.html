@@ -3,7 +3,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en" >
 
@@ -101,13 +100,23 @@ function drawBot(bot) {
     ctx.fillStyle = "rgba(255,0,0,.5)";
     ctx.fill();
   }
+  if (bot.r == bots[1].r) {
+    ctx.fillStyle = "rgba(0,100,100,.5)";
+    ctx.fill();
+  }
+  if (bot.r == bots[2].r) {
+    ctx.fillStyle = "rgba(0,00,100,.5)";
+    ctx.fill();
+  }
+  if (bot.r == bots[3].r) {
+    ctx.fillStyle = "rgba(0,100,00,.5)";
+    ctx.fill();
+  }
 }
 
 function moveBot(bot) {
   timer = timer + 1;
-    let theTime = document.getElementById("theTime");
-  theTime.innerHTML = timer;
-  
+  document.getElementById("theTime").textContent = (timer/100).toFixed(1);
   bot.x = bot.x + bot.dx;
   bot.y = bot.y - bot.dy;
   if (bot.y - bot.r < 0) {
@@ -148,16 +157,18 @@ function checkCollide() {
         if (bots[i].r < bots[j].r) {
           bots[j].r = Math.sqrt(bots[i].r ** 2 + bots[j].r ** 2);
           bots[i].r = 0;
+          
         }
       }
     }
   }
   if (bots[0].r == 0) {
+    oh_nosnd.play();
     let deathSpan = document.getElementById("deaths");
     deaths = deathSpan.innerHTML * 1 + 1;
     deaths.innerHTML = deaths;
     doResetBots();
-    oh_nosnd.play();
+    
   }
   for (i = bots.length - 1; i > 0; i--) {
     //console.log(i,bots[i].r);
@@ -168,7 +179,7 @@ setInterval(moveBots, 100);
 
 function dokeydown(e) {
   console.log(e.key);
-  let stepSize = 2;
+  let stepSize = 1;
   if (e.key == "ArrowUp") {
     bots[0].dy = bots[0].dy + stepSize;
   }
@@ -182,10 +193,10 @@ function dokeydown(e) {
   }
 
   if (e.key == "ArrowDown") {
-    bots[0].dy = bots[0].dy + stepSize;
+    bots[0].dy = bots[0].dy - stepSize;
   }
   //Stop the Bot
-    if (e.key == " ") {
+  if (e.key == " ") {
     bots[0].dy = 0;
     bots[0].dx = 0;
     e.stopPropagation();
@@ -202,3 +213,4 @@ document.getElementById("resetBots").addEventListener("click", doResetBots);
 
 </html>
  
+
