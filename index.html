@@ -2,7 +2,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en" >
 
@@ -96,22 +95,16 @@ function drawBot(bot) {
   y = bot.y - bot.r * Math.sin(bot.theta);
   ctx.lineTo(x, y);
   ctx.stroke();
+  
+  if (bot.i == bots.i) {
+    ctx.fillStyle = "rgba(0,100,100,.5)";
+    ctx.fill();
+  }
   if (bot.r == bots[0].r) {
     ctx.fillStyle = "rgba(255,0,0,.5)";
     ctx.fill();
   }
-  if (bot.r == bots[1].r) {
-    ctx.fillStyle = "rgba(0,100,100,.5)";
-    ctx.fill();
-  }
-  if (bot.r == bots[2].r) {
-    ctx.fillStyle = "rgba(0,00,100,.5)";
-    ctx.fill();
-  }
-  if (bot.r == bots[3].r) {
-    ctx.fillStyle = "rgba(0,100,00,.5)";
-    ctx.fill();
-  }
+  
 }
 
 function moveBot(bot) {
@@ -157,16 +150,17 @@ function checkCollide() {
         if (bots[i].r < bots[j].r) {
           bots[j].r = Math.sqrt(bots[i].r ** 2 + bots[j].r ** 2);
           bots[i].r = 0;
+          let deaths = document.getElementById("deaths");
+          deaths.innerHTML++
+          deaths = deaths.innerHTML * 1 + 1;
           
         }
       }
     }
   }
-  if (bots[0].r == 0) {
+
+ if (bots[0].r == 0) {
     oh_nosnd.play();
-    let deathSpan = document.getElementById("deaths");
-    deaths = deathSpan.innerHTML * 1 + 1;
-    deaths.innerHTML = deaths;
     doResetBots();
     
   }
@@ -213,4 +207,3 @@ document.getElementById("resetBots").addEventListener("click", doResetBots);
 
 </html>
  
-
